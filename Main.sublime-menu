@@ -1,0 +1,13 @@
+[
+{
+    "id" : "tools",
+    "children":
+    [
+        {
+            "id" : "envswitcher",
+            "caption" : "EnvSwitcher",
+            "command" : "env_switcher"
+        }
+    ]
+}
+]

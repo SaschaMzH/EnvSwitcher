@@ -1,0 +1,12 @@
+{
+    "debug": false,
+    "default_env": "Default",
+    "envs":
+    {
+        "Default":
+        {
+            "PATH": "%PATH%",
+            "PYTHONPATH": "%PYTHONPATH%",
+        },
+    }
+}

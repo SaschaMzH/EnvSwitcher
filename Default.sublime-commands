@@ -1,0 +1,28 @@
+[
+    {
+        "caption": "EnvSwitcher: Settings – Default",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/EnvSwitcher/EnvSwitcher.sublime-settings"
+        }
+    },
+    {
+        "caption": "EnvSwitcher: Settings – User",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/User/EnvSwitcher.sublime-settings"
+        }
+    },
+    {
+        "caption": "EnvSwitcher: Key Bindings – Default",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/EnvSwitcher/Default.sublime-keymap"
+        }
+    },
+
+    {
+        "caption": "EnvSwitcher: Choose Environment",
+        "command": "env_switcher"
+    },
+]
