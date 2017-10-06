@@ -45,7 +45,7 @@ For Example::
 ### To switch :
 
  - use <kbd>cmd</kbd>+<kbd>shift</kbd>+<kbd>P</kbd> (<kbd>ctrl</kbd>+<kbd>shift</kbd>+<kbd>P</kbd> on Windows) then `EnvSwitcher: Choose Environment` to show the list of your defined environments.
- - use <kbd>cmd</kbd>+<kbd>alt</kbd>+<kbd>P</kbd> (<kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>P</kbd> on Windows) to show the list of your defined environments.
+ - use <kbd>cmd</kbd>+<kbd>alt</kbd>+<kbd>E</kbd> (<kbd>ctrl</kbd>+<kbd>alt</kbd>+<kbd>E</kbd> on Windows) to show the list of your defined environments.
 
 ## Support :
 
