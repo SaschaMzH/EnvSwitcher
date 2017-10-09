@@ -59,9 +59,9 @@ The code is available at github [project][home] under [MIT licence][licence].
 
 
 
- [home]: https://github.com/SaschaMzH/sublimetext-env-switcher
- [issue]: https://github.com/SaschaMzH/sublimetext-env-switcher/issues
- [settings]: https://github.com/SaschaMzH/sublimetext-env-switcher/blob/master/MarkdownPreview.sublime-settings
+ [home]: https://github.com/SaschaMzH/EnvSwitcher
+ [issue]: https://github.com/SaschaMzH/EnvSwitcher/issues
+ [settings]: https://github.com/SaschaMzH/EnvSwitcher/blob/master/MarkdownPreview.sublime-settings
  [master]: https://github.com/revolunet/sublimetext-markdown-preview/archive/master.zip
  [licence]: http://SaschaMzH.mit-license.org
 
