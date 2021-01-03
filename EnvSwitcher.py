@@ -115,7 +115,30 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
             env_name = list(envs.keys())[item]
             lis = list(envs.values())
             sublime.status_message("Env: '{}'".format(env_name))
+
+            # check to see if there is an env file specified
+            if settings.get("env_file_support"):
+                # get the name of the env file we're using
+                env_file = lis[item][settings.get("env_file_key")]
+                package_dir =\
+                    sublime.active_window().extract_variables()['project_path']
+                with open(os.path.join(package_dir, env_file), 'r') as fh:
+                    file_vars = [
+                        (
+                            l.strip().split("=", 1)[0],
+                            l.strip().split("=", 1)[1]
+                        ) for l in fh.readlines() if l[0] != "#"
+                    ]
+                trace(f'file_vars: {file_vars}')
+                for key, val in file_vars:
+                    os.environ[key] = os.path.expandvars(val)
+
+            # continue loading the non-env file variables
             for key, value in lis[item].items():
+
+                if settings.get("env_file_support")
+                        and key == settings.get("env_file_key"):
+                    continue
 
                 if ("%{}%".format(key) in value) and (key in SYSTEM_ENVS):
                     value = value.replace("%{}%".format(key), SYSTEM_ENVS[key])
