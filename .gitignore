@@ -1,0 +1,10 @@
+# Ignore the sublime project files
+*.sublime-project
+*.sublime-workspace
+
+# Ignore cache
+**/__pycache__
+
+# Ignore output files
+*.zip
+*.sublime-package

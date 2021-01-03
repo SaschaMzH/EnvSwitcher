@@ -10,6 +10,7 @@ import sublime_plugin
 DEBUG = False
 ENV_GROUP = "envs"
 SYSTEM_ENVS = dict()
+ENV_FILE_VARS = list()
 
 SETTINGS_FILENAME = "EnvSwitcher.sublime-settings"
 
@@ -115,7 +116,46 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
             env_name = list(envs.keys())[item]
             lis = list(envs.values())
             sublime.status_message("Env: '{}'".format(env_name))
+
+            # check to see if there is an env file specified
+            if settings.get("env_file_support"):
+                try:
+                    # get the name of the env file we're using
+                    env_file = lis[item][settings.get("env_file_key")]
+                    package_dir =\
+                        sublime.active_window().extract_variables(
+                            )['project_path']
+                    # load the values from the file
+                    with open(os.path.join(package_dir, env_file), 'r') as fh:
+                        file_vars = [
+                            (
+                                l.strip().split("=", 1)[0],
+                                l.strip().split("=", 1)[1]
+                            ) for l in fh.readlines() if l[0] != "#"
+                        ]
+                    # expand the variables and store them in the environment
+                    for key, val in file_vars:
+                        os.environ[key] = os.path.expandvars(val)
+                        ENV_FILE_VARS.append(key)
+                    # remove variables that are dangling from the env file
+                    dangling_vars = list()
+                    for key in os.environ.keys():
+                        if key in ENV_FILE_VARS \
+                                and key not in [v[0] for v in file_vars]:
+                            trace('Removing dangling variable: {}'.format(key))
+                            dangling_vars.append(key)
+                    for key in dangling_vars:
+                        del os.environ[key]
+                except FileNotFoundError as e:
+                    trace("env_file_support is enabled, but env_file not "
+                        "found.")
+
+            # continue loading the non-env file variables
             for key, value in lis[item].items():
+
+                if settings.get("env_file_support") \
+                        and key == settings.get("env_file_key"):
+                    continue
 
                 if ("%{}%".format(key) in value) and (key in SYSTEM_ENVS):
                     value = value.replace("%{}%".format(key), SYSTEM_ENVS[key])
