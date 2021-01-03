@@ -1,6 +1,8 @@
 {
     "debug": false,
     "default_env": "Default",
+    "env_file_support": true,
+    "env_file_key": "env_file",
     "envs":
     {
         "Default":
