@@ -118,21 +118,25 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
 
             # check to see if there is an env file specified
             if settings.get("env_file_support"):
-                # get the name of the env file we're using
-                env_file = lis[item][settings.get("env_file_key")]
-                package_dir =\
-                    sublime.active_window().extract_variables()['project_path']
-                # load the values from the file
-                with open(os.path.join(package_dir, env_file), 'r') as fh:
-                    file_vars = [
-                        (
-                            l.strip().split("=", 1)[0],
-                            l.strip().split("=", 1)[1]
-                        ) for l in fh.readlines() if l[0] != "#"
-                    ]
-                # expand the variables and store them in the environment
-                for key, val in file_vars:
-                    os.environ[key] = os.path.expandvars(val)
+                try:
+                    # get the name of the env file we're using
+                    env_file = lis[item][settings.get("env_file_key")]
+                    package_dir =\
+                        sublime.active_window().extract_variables()['project_path']
+                    # load the values from the file
+                    with open(os.path.join(package_dir, env_file), 'r') as fh:
+                        file_vars = [
+                            (
+                                l.strip().split("=", 1)[0],
+                                l.strip().split("=", 1)[1]
+                            ) for l in fh.readlines() if l[0] != "#"
+                        ]
+                    # expand the variables and store them in the environment
+                    for key, val in file_vars:
+                        os.environ[key] = os.path.expandvars(val)
+                except FileNotFoundError as e:
+                    trace("env_file_support is enabled, but env_file not "
+                        "found.")
 
             # continue loading the non-env file variables
             for key, value in lis[item].items():
