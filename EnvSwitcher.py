@@ -122,6 +122,7 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
                 env_file = lis[item][settings.get("env_file_key")]
                 package_dir =\
                     sublime.active_window().extract_variables()['project_path']
+                # load the values from the file
                 with open(os.path.join(package_dir, env_file), 'r') as fh:
                     file_vars = [
                         (
@@ -129,6 +130,7 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
                             l.strip().split("=", 1)[1]
                         ) for l in fh.readlines() if l[0] != "#"
                     ]
+                # expand the variables and store them in the environment
                 for key, val in file_vars:
                     os.environ[key] = os.path.expandvars(val)
 
