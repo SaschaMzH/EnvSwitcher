@@ -10,6 +10,7 @@ import sublime_plugin
 DEBUG = False
 ENV_GROUP = "envs"
 SYSTEM_ENVS = dict()
+ENV_FILE_VARS = list()
 
 SETTINGS_FILENAME = "EnvSwitcher.sublime-settings"
 
@@ -134,6 +135,16 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
                     # expand the variables and store them in the environment
                     for key, val in file_vars:
                         os.environ[key] = os.path.expandvars(val)
+                        ENV_FILE_VARS.append(key)
+                    # remove variables that are dangling from the env file
+                    dangling_vars = list()
+                    for key in os.environ.keys():
+                        if key in ENV_FILE_VARS \
+                                and key not in [v[0] for v in file_vars]:
+                            trace('Removing dangling variable: {}'.format(key))
+                            dangling_vars.append(key)
+                    for key in dangling_vars:
+                        del os.environ[key]
                 except FileNotFoundError as e:
                     trace("env_file_support is enabled, but env_file not "
                         "found.")
