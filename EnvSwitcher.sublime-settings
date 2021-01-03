@@ -9,6 +9,7 @@
         {
             "PATH": "%PATH%",
             "PYTHONPATH": "%PYTHONPATH%",
+            "env_file": ".env",
         },
     }
 }
