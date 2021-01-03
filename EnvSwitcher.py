@@ -123,7 +123,8 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
                     # get the name of the env file we're using
                     env_file = lis[item][settings.get("env_file_key")]
                     package_dir =\
-                        sublime.active_window().extract_variables()['project_path']
+                        sublime.active_window().extract_variables(
+                            )['project_path']
                     # load the values from the file
                     with open(os.path.join(package_dir, env_file), 'r') as fh:
                         file_vars = [
