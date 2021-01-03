@@ -129,14 +129,13 @@ class EnvSwitcher(sublime_plugin.WindowCommand):
                             l.strip().split("=", 1)[1]
                         ) for l in fh.readlines() if l[0] != "#"
                     ]
-                trace(f'file_vars: {file_vars}')
                 for key, val in file_vars:
                     os.environ[key] = os.path.expandvars(val)
 
             # continue loading the non-env file variables
             for key, value in lis[item].items():
 
-                if settings.get("env_file_support")
+                if settings.get("env_file_support") \
                         and key == settings.get("env_file_key"):
                     continue
 
