@@ -75,7 +75,7 @@ Each environment profile can use a different filename to read variables from, bu
 
 ## Support :
 
-- Any bugs about Markdown Preview please feel free to report [here][issue].
+- Any bugs about EnvSwitcher please feel free to report [here][issue].
 - And you are welcome to fork and submit pullrequests.
 
 
